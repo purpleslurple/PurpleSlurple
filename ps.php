@@ -26,8 +26,8 @@ Hans Fredrik Nordhaug <hans@nordhaug.priv.no>:
 -->'; 
 
 // Automatically detect the location of this file 
-if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) { 
-    $file_location = $_SERVER['PATH_INFO']; 
+if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) { 
+    $file_location = $_SERVER['REQUEST_URI']; 
 } else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) { 
     $file_location = $_SERVER['PHP_SELF']; 
 } else { 
