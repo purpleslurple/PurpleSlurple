@@ -68,7 +68,7 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 } 
 
 // check for sloppy input - missing protocol 
-if (!ereg('://', $theurl)) 
+if (!preg_match('://', $theurl)) 
     $theurl = "https://".$theurl; 
      
 // check for http-based url (thanks Jonathan Cheyer) 
