@@ -34,6 +34,7 @@ if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) {
     $file_location = $_SERVER['SCRIPT_NAME']; 
 } 
 $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
+echo $file_location;
 
 // Register globals is bad, bad, bad - setting $theurl explicitly 
 $theurl = $_GET['theurl']; 
