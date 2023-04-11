@@ -34,7 +34,6 @@ if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) {
     $file_location = $_SERVER['SCRIPT_NAME']; 
 } 
 $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
-echo $file_location;
 
 // Register globals is bad, bad, bad - setting $theurl explicitly 
 $theurl = $_GET['theurl']; 
@@ -69,8 +68,8 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 } 
 
 // check for sloppy input - missing protocol 
-if (!preg_match('://', $theurl)) 
-    $theurl = "https://".$theurl; 
+// if (!preg_match('://', $theurl)) 
+//     $theurl = "https://".$theurl; 
      
 // check for http-based url (thanks Jonathan Cheyer) 
 // if (!ereg('http://', $theurl)) 
