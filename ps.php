@@ -105,12 +105,18 @@ $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style
 // get the web page into an array, loop through array, find <h>, <p> and <li> tags, apply Purple numbers 
 $theurl = urlencode($theurl);
 $fcontents = file($theurl);
-$ps_contents = ""; 
-while (list ($line_num, $line) = each($fcontents)) { 
-    $pattern = "<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>"; 
-    $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
-    $ps_contents .= preg_replace($pattern, $replacement, $line); 
-} 
+
+if ($fcontents === false) {
+    die("Failed to retrieve file");
+}
+
+$ps_contents = "";
+foreach ($fcontents as $line_num => $line) {
+    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/";
+    $replacement = "$0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><span class='purple-number'>$line_num</span></a>) ";
+    $line = preg_replace($pattern, $replacement, $line);
+    $ps_contents .= $line;
+}
 
 // find head and body and insert disclaimer/header/footer/style/base 
 list($head,$body) = explode("</head>", $ps_contents); 
