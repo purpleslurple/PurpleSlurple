@@ -129,7 +129,8 @@ $theurl = urlencode($theurl);
 $ps_contents = ""; 
 foreach ($fcontents as $line_num=>$line) { 
     $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/"; 
-    $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
+    // $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
+    $replacement = "(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
     $ps_contents .= preg_replace($pattern, $replacement, $line); 
 }
 
