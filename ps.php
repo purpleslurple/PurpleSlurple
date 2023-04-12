@@ -102,9 +102,9 @@ $ps_base = "<base href='$theurl'>";
 $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style>\n"; 
 
 // get the web page into an array, loop through array, find <h>, <p> and <li> tags, apply Purple numbers 
-echo $theurl;
-$theurl = urlencode($theurl);
-echo $theurl;
+// echo $theurl;
+// $theurl = urlencode($theurl);
+// echo $theurl;
 // Set up the HTTP context options
 $options = array(
     'http' => array(
