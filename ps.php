@@ -104,7 +104,21 @@ $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style
 
 // get the web page into an array, loop through array, find <h>, <p> and <li> tags, apply Purple numbers 
 $theurl = urlencode($theurl);
-$fcontents = file($theurl);
+
+// Set up the HTTP context options
+$options = array(
+    'http' => array(
+        'method' => 'GET',
+        'header' => "Accept-language: en\r\n" .
+                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3\r\n"
+    )
+);
+
+// Create the HTTP context
+$context = stream_context_create($options);
+
+// Get the contents of the URL
+$fcontents = file_get_contents($theurl, false, $context);
 
 if ($fcontents === false) {
     die("Failed to retrieve file");
