@@ -124,13 +124,13 @@ $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style
 //     die("Failed to retrieve file");
 // }
 
-$ps_contents = "";
-$lines = file($theurl);
-foreach ($lines as $line_num => $line) {
-    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/";
-    $replacement = "$0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><span class='purple-number'>$line_num</span></a>) ";
-    $line = preg_replace($pattern, $replacement, $line);
-    $ps_contents .= $line;
+$fcontents = file($theurl); 
+$theurl = urlencode($theurl); 
+$ps_contents = ""; 
+foreach ($fcontents as $line_num=>$line) { 
+    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/"; 
+    $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
+    $ps_contents .= preg_replace($pattern, $replacement, $line); 
 }
 
 // find head and body and insert disclaimer/header/footer/style/base 
