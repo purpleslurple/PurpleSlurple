@@ -120,9 +120,9 @@ $context = stream_context_create($options);
 // Get the contents of the URL
 $fcontents = file_get_contents($theurl, false, $context);
 
-if ($fcontents === false) {
-    die("Failed to retrieve file");
-}
+// if ($fcontents === false) {
+//     die("Failed to retrieve file");
+// }
 
 $ps_contents = "";
 foreach ($fcontents as $line_num => $line) {
