@@ -119,7 +119,8 @@ $context = stream_context_create($options);
 
 // Get the contents of the URL
 $fcontents = file_get_contents($theurl, false, $context);
-
+echo "Got it!<hr>";
+echo $fcontents;
 // if ($fcontents === false) {
 //     die("Failed to retrieve file");
 // }
