@@ -106,27 +106,27 @@ $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style
 // $theurl = urlencode($theurl);
 // echo $theurl;
 // Set up the HTTP context options
-$options = array(
-    'http' => array(
-        'method' => 'GET',
-        'header' => "Accept-language: en\r\n" .
-                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3\r\n"
-    )
-);
+// $options = array(
+//     'http' => array(
+//         'method' => 'GET',
+//         'header' => "Accept-language: en\r\n" .
+//                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3\r\n"
+//     )
+// );
 
-// Create the HTTP context
-$context = stream_context_create($options);
+// // Create the HTTP context
+// $context = stream_context_create($options);
 
-// Get the contents of the URL
-$fcontents = file_get_contents($theurl, false, $context);
-echo "Got it!<hr>";
-echo $fcontents;
+// // Get the contents of the URL
+// $fcontents = file_get_contents($theurl, false, $context);
+
 // if ($fcontents === false) {
 //     die("Failed to retrieve file");
 // }
 
 $ps_contents = "";
-foreach ($fcontents as $line_num => $line) {
+$lines = file($theurl);
+foreach ($lines as $line_num => $line) {
     $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/";
     $replacement = "$0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><span class='purple-number'>$line_num</span></a>) ";
     $line = preg_replace($pattern, $replacement, $line);
