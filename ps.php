@@ -51,8 +51,7 @@ if (!($theurl))
 <p><b><q>Slurp up a Web page, spit back Purple numbers</q></b></p><hr> 
 <p>If you are not familiar with Purple numbers you might want to read Eugene Eric Kim\'s &ldquo; 
 <a href="https://web.archive.org/web/20021102203338/http://www.eekim.com/software/purple/purple.html">An Introduction to Purple</a>&rdquo;. 
-See also Eric Armstrong\'s comments on <a href="'.$file_location. 
-'?theurl=https://web.archive.org/web/20030422112816/http://treelight.com/software/collaboration/whatsWrongWithEmail.html#purp758">granular addressability</a></p> 
+See also Eric Armstrong\'s comments on <a href="">granular addressability</a></p> 
 <p>Want one-click Purple numbers? Right-click on this link, 
 <a href="javascript:location.href=\''.$file_location. 
 '?theurl=\'+document.location.href;">PurpleSlurple Bookmarklet</a>, 
@@ -103,8 +102,9 @@ $ps_base = "<base href='$theurl'>";
 $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style>\n"; 
 
 // get the web page into an array, loop through array, find <h>, <p> and <li> tags, apply Purple numbers 
+echo $theurl;
 $theurl = urlencode($theurl);
-
+echo $theurl;
 // Set up the HTTP context options
 $options = array(
     'http' => array(
