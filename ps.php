@@ -123,10 +123,8 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // if ($html_content === false) {
 //     die("Failed to retrieve file");
 // }
-
-$html_content = file($theurl); 
 $theurl = urlencode($theurl); 
-$modified_html_content = ""; 
+$html_content = file_get_contents($theurl); 
 // create a new DOMDocument instance
 $dom = new DOMDocument();
 
