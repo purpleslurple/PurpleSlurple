@@ -36,10 +36,7 @@ if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) {
 $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
 
 // Register globals is bad, bad, bad - setting $theurl explicitly 
-$theurl = $_GET['theurl']; 
-
-//if (!ereg('^[^./][^/]*$', $theurl)) 
-//     die('bad filename'); //die, do not process 
+$theurl = $_GET['theurl'];
 
 // check for target URL, if none present PS form 
 if (!($theurl)) 
@@ -66,14 +63,6 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
   exit; 
 } 
 
-// check for sloppy input - missing protocol 
-// if (!preg_match('://', $theurl)) 
-//     $theurl = "https://".$theurl; 
-     
-// check for http-based url (thanks Jonathan Cheyer) 
-// if (!ereg('http://', $theurl)) 
-//      die('PurpleSlurple only supports http-based urls'); //die, do not process 
-
 // Do not slurp self 
 // if (strpos($theurl,$file_location) !== false) 
 //      die('PurpleSlurple won\'t slurp itself :-)'); //die, do not process 
@@ -96,33 +85,6 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // Thanks to http://marc.theaimsgroup.com/?l=php-general&m=95597547227951&w=2  Duh! 
 // $ps_base = "<base href='$theurl'>"; 
 
-// PurpleSlurple "Proxy" stuff goes here (or somewhere) someday 
-
-// collapse outline (hiding elements) 
-// $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style>\n"; 
-
-// get the web page into an array, loop through array, find <h>, <p> and <li> tags, apply Purple numbers 
-// echo $theurl;
-// $theurl = urlencode($theurl);
-// echo $theurl;
-// Set up the HTTP context options
-// $options = array(
-//     'http' => array(
-//         'method' => 'GET',
-//         'header' => "Accept-language: en\r\n" .
-//                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3\r\n"
-//     )
-// );
-
-// // Create the HTTP context
-// $context = stream_context_create($options);
-
-// // Get the contents of the URL
-// $html_content = file_get_contents($theurl, false, $context);
-
-// if ($html_content === false) {
-//     die("Failed to retrieve file");
-// }
 $theurl = urlencode($theurl); 
 $html_content = file_get_contents($theurl);
 
@@ -130,13 +92,8 @@ if ($html_content !== false) {
     // create a new DOMDocument instance
     $dom = new DOMDocument();
 }
-    // enable internal errors for parsing HTML content
-    libxml_use_internal_errors(true);
-    
     // load the HTML content into the DOMDocument
     $dom->loadHTML($html_content);
-
-
     
     // find all the relevant HTML tags (p, h1-h6, li)
     $tags = $dom->getElementsByTagName('p');
@@ -163,12 +120,4 @@ if ($html_content !== false) {
     // get the modified HTML content from the DOMDocument
     $modified_html_content = $dom->saveHTML();
     echo $modified_html_content;
-    
-    // get any errors that occurred during parsing
-    $errors = libxml_get_errors();
-    if (!empty($errors)) {
-        echo "handle errors";
-    } else {
-        echo "we got errors loading HTML content";
-    }
 ?>
