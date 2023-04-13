@@ -84,7 +84,13 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // Thanks to http://marc.theaimsgroup.com/?l=php-general&m=95597547227951&w=2  Duh! 
 // $ps_base = "<base href='$theurl'>"; 
 
-$html_content = file_get_contents($theurl);
+// $html_content = file_get_contents($theurl);
+$html_content = @file_get_contents($theurl);
+if ($html_content === false) {
+    // handle the error here
+    echo "file_get_contents error";
+}
+
 
 if ($html_content !== false) {
     // create a new DOMDocument instance
