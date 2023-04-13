@@ -124,56 +124,51 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 //     die("Failed to retrieve file");
 // }
 $theurl = urlencode($theurl); 
-$html_content = file_get_contents($theurl); 
-// create a new DOMDocument instance
-$dom = new DOMDocument();
+$html_content = file_get_contents($theurl);
 
-// load the HTML content into the DOMDocument
-$dom->loadHTML($html_content);
-
-// find all the relevant HTML tags (p, h1-h6, li)
-$tags = $dom->getElementsByTagName('p');
-$tags = array_merge($tags, $dom->getElementsByTagName('h1'));
-$tags = array_merge($tags, $dom->getElementsByTagName('h2'));
-$tags = array_merge($tags, $dom->getElementsByTagName('h3'));
-$tags = array_merge($tags, $dom->getElementsByTagName('h4'));
-$tags = array_merge($tags, $dom->getElementsByTagName('h5'));
-$tags = array_merge($tags, $dom->getElementsByTagName('h6'));
-$tags = array_merge($tags, $dom->getElementsByTagName('li'));
-
-// loop through each tag and modify its content
-foreach ($tags as $tag) {
-    $line_num = $tag->getLineNo();
-    $tag_content = $tag->ownerDocument->saveXML($tag);
-    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/i";
-    $replacement = "$tag_content(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) ";
-    $new_tag_content = preg_replace($pattern, $replacement, $tag_content);
-    $new_tag = $dom->createDocumentFragment();
-    $new_tag->appendXML($new_tag_content);
-    $tag->parentNode->replaceChild($new_tag, $tag);
+if ($html_content !== false) {
+    // create a new DOMDocument instance
+    $dom = new DOMDocument();
 }
+    // enable internal errors for parsing HTML content
+    libxml_use_internal_errors(true);
+    
+    // load the HTML content into the DOMDocument
+    $dom->loadHTML($html_content);
 
-// get the modified HTML content from the DOMDocument
-$modified_html_content = $dom->saveHTML();
-echo $modified_html_content;
 
-
-// find head and body and insert disclaimer/header/footer/style/base 
-// list($head,$body) = explode("</head>", $modified_html_content); 
-// if (isset($_GET['collapse']) && ($_GET['collapse'] == "yes")) { 
-//     $head = str_replace("<head>","<head>\n$ps_style", $head);; 
-// } 
-// if (!strpos("<base",$head)) { 
-//     $head = str_replace("<head>","<head>\n$ps_base", $head);; 
-// } 
-// $head = str_replace("<head>","<head>\n$ps_disclaimer", $head); 
-// if ($show_header) { 
-//     $body = preg_replace("/<body[^>]*>/i", "$0\n$ps_header", $body);
-// } 
-// if ($show_footer) { 
-//     $body = str_replace("</body>","$ps_footer\n</body>",$body); 
-// } 
-
-// Sending result to browser 
-    // echo $head."</head>".$body; 
+    
+    // find all the relevant HTML tags (p, h1-h6, li)
+    $tags = $dom->getElementsByTagName('p');
+    $tags = array_merge($tags, $dom->getElementsByTagName('h1'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('h2'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('h3'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('h4'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('h5'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('h6'));
+    $tags = array_merge($tags, $dom->getElementsByTagName('li'));
+    
+    // loop through each tag and modify its content
+    foreach ($tags as $tag) {
+        $line_num = $tag->getLineNo();
+        $tag_content = $tag->ownerDocument->saveXML($tag);
+        $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/i";
+        $replacement = "$tag_content(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) ";
+        $new_tag_content = preg_replace($pattern, $replacement, $tag_content);
+        $new_tag = $dom->createDocumentFragment();
+        $new_tag->appendXML($new_tag_content);
+        $tag->parentNode->replaceChild($new_tag, $tag);
+    }
+    
+    // get the modified HTML content from the DOMDocument
+    $modified_html_content = $dom->saveHTML();
+    echo $modified_html_content;
+    
+    // get any errors that occurred during parsing
+    $errors = libxml_get_errors();
+    if (!empty($errors)) {
+        echo "handle errors";
+    } else {
+        echo "we got errors loading HTML content";
+    }
 ?>
