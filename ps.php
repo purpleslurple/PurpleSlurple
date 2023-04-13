@@ -118,23 +118,48 @@ $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style
 // $context = stream_context_create($options);
 
 // // Get the contents of the URL
-// $fcontents = file_get_contents($theurl, false, $context);
+// $html_content = file_get_contents($theurl, false, $context);
 
-// if ($fcontents === false) {
+// if ($html_content === false) {
 //     die("Failed to retrieve file");
 // }
 
-$fcontents = file($theurl); 
+$html_content = file($theurl); 
 $theurl = urlencode($theurl); 
-$ps_contents = ""; 
-foreach ($fcontents as $line_num => $line) {
-    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/i"; 
-    $replacement = "$0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
-    $ps_contents .= preg_replace($pattern, $replacement, $line); 
+$modified_html_content = ""; 
+// create a new DOMDocument instance
+$dom = new DOMDocument();
+
+// load the HTML content into the DOMDocument
+$dom->loadHTML($html_content);
+
+// find all the relevant HTML tags (p, h1-h6, li)
+$tags = $dom->getElementsByTagName('p');
+$tags = array_merge($tags, $dom->getElementsByTagName('h1'));
+$tags = array_merge($tags, $dom->getElementsByTagName('h2'));
+$tags = array_merge($tags, $dom->getElementsByTagName('h3'));
+$tags = array_merge($tags, $dom->getElementsByTagName('h4'));
+$tags = array_merge($tags, $dom->getElementsByTagName('h5'));
+$tags = array_merge($tags, $dom->getElementsByTagName('h6'));
+$tags = array_merge($tags, $dom->getElementsByTagName('li'));
+
+// loop through each tag and modify its content
+foreach ($tags as $tag) {
+    $line_num = $tag->getLineNo();
+    $tag_content = $tag->ownerDocument->saveXML($tag);
+    $replacement = "$tag_content(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) ";
+    $new_tag_content = preg_replace($pattern, $replacement, $tag_content);
+    $new_tag = $dom->createDocumentFragment();
+    $new_tag->appendXML($new_tag_content);
+    $tag->parentNode->replaceChild($new_tag, $tag);
 }
 
+// get the modified HTML content from the DOMDocument
+$modified_html_content = $dom->saveHTML();
+
+
 // find head and body and insert disclaimer/header/footer/style/base 
-list($head,$body) = explode("</head>", $ps_contents); 
+list($head,$body) = explode("</head>", $modified_html_content); 
 if (isset($_GET['collapse']) && ($_GET['collapse'] == "yes")) { 
     $head = str_replace("<head>","<head>\n$ps_style", $head);; 
 } 
