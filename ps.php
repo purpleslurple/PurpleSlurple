@@ -35,6 +35,7 @@ if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) {
 } 
 $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
 
+$theurl = $_GET['theurl'];
 
 // check for target URL, if none present PS form 
 if (!($theurl)) 
@@ -83,7 +84,6 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // Thanks to http://marc.theaimsgroup.com/?l=php-general&m=95597547227951&w=2  Duh! 
 // $ps_base = "<base href='$theurl'>"; 
 
-$theurl = $_GET['theurl'];
 $html_content = file_get_contents($theurl);
 
 if ($html_content !== false) {
