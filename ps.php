@@ -145,6 +145,7 @@ $tags = array_merge($tags, $dom->getElementsByTagName('li'));
 foreach ($tags as $tag) {
     $line_num = $tag->getLineNo();
     $tag_content = $tag->ownerDocument->saveXML($tag);
+    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/i";
     $replacement = "$tag_content(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) ";
     $new_tag_content = preg_replace($pattern, $replacement, $tag_content);
     $new_tag = $dom->createDocumentFragment();
@@ -154,6 +155,7 @@ foreach ($tags as $tag) {
 
 // get the modified HTML content from the DOMDocument
 $modified_html_content = $dom->saveHTML();
+echo $modified_html_content;
 
 
 // find head and body and insert disclaimer/header/footer/style/base 
@@ -174,5 +176,4 @@ $modified_html_content = $dom->saveHTML();
 
 // Sending result to browser 
     // echo $head."</head>".$body; 
-echo $modified_html_content;
 ?>
