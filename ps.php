@@ -87,14 +87,17 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 
 $theurl = urlencode($theurl); 
 $html_content = file_get_contents($theurl);
-
+echo "html_content<br>";
+echo $html_content;
 if ($html_content !== false) {
     // create a new DOMDocument instance
     $dom = new DOMDocument();
 }
     // load the HTML content into the DOMDocument
     $dom->loadHTML($html_content);
-    
+    echo "<hr>dom:<br>";
+    echo $dom;
+    die;
     // find all the relevant HTML tags (p, h1-h6, li)
     $tags = $dom->getElementsByTagName('p');
     $tags = array_merge($tags, $dom->getElementsByTagName('h1'));
