@@ -129,8 +129,7 @@ $theurl = urlencode($theurl);
 $ps_contents = ""; 
 foreach ($fcontents as $line_num=>$line) { 
     $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/"; 
-    // $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
-    $replacement = "(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
+    $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' name='purp$line_num'><font color='purple'>$line_num</font></a>) "; 
     $ps_contents .= preg_replace($pattern, $replacement, $line); 
 }
 
@@ -144,7 +143,7 @@ if (!strpos("<base",$head)) {
 } 
 $head = str_replace("<head>","<head>\n$ps_disclaimer", $head); 
 if ($show_header) { 
-    $body = eregi_replace("<body[^>]*>","\\0\n$ps_header",$body); 
+    $body = preg_replace("<body[^>]*>","\\0\n$ps_header",$body); 
 } 
 if ($show_footer) { 
     $body = str_replace("</body>","$ps_footer\n</body>",$body); 
