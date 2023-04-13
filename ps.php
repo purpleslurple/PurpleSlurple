@@ -37,7 +37,7 @@ $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
 
 // Register globals is bad, bad, bad - setting $theurl explicitly 
 $theurl = $_GET['theurl'];
-
+echo $theurl."<br>";
 // check for target URL, if none present PS form 
 if (!($theurl)) 
 { 
@@ -85,10 +85,10 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // Thanks to http://marc.theaimsgroup.com/?l=php-general&m=95597547227951&w=2  Duh! 
 // $ps_base = "<base href='$theurl'>"; 
 
-$theurl = urlencode($theurl); 
+// $theurl = urlencode($theurl); 
 $html_content = file_get_contents($theurl);
-echo "html_content<br>";
-echo $html_content;
+echo "html_content - line 90<br>".$html_content;
+
 if ($html_content !== false) {
     // create a new DOMDocument instance
     $dom = new DOMDocument();
