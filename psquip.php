@@ -18,12 +18,20 @@ $context = stream_context_create($options);
 // Get the contents of the URL
 $response = file_get_contents($url, false, $context);
 
-// Highlight the search text in the response
-$highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $response);
+if (isset($text) && $text !== '') {
+    // The text variable is not empty
+    // Highlight the search text in the response
+    $highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $response);
 
-// Display the highlighted response
-echo $highlightedResponse;
+    // Display the highlighted response
+    echo $highlightedResponse;
 
-// Scroll to the first occurrence of the highlighted text
-echo "<script>var firstMatch = document.querySelector('span[style=\"background-color:yellow;\"]');if (firstMatch) firstMatch.scrollIntoView();</script>";
+    // Scroll to the first occurrence of the highlighted text
+    echo "<script>var firstMatch = document.querySelector('span[style=\"background-color:yellow;\"]');if (firstMatch) firstMatch.scrollIntoView();</script>";
+  } else {
+    // The text variable is empty
+    // PurpleSlurple code here...
+    echo "'Slurple me!";
+ }
+
 ?>
