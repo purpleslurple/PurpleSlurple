@@ -86,7 +86,7 @@ was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>'
 // $ps_base = "<base href='$theurl'>"; 
 
 // $html_content = file_get_contents($theurl);
-$html_content = @file_get_contents($theurl);
+$html_content = file_get_contents($theurl);
 if ($html_content === false) {
     // handle the error here
     echo "file_get_contents error";
