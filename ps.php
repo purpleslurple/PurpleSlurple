@@ -36,6 +36,13 @@
 // $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
 $file_location = "https://purpleslurple.com/ps.php";
 
+// check if the 'theurl' parameter is set
+if (!isset($_GET['theurl'])) {
+    // handle the error here
+    echo "theurl parameter is not set";
+    exit;
+}
+
 $theurl = $_GET['theurl'];
 
 // check for target URL, if none present PS form 
@@ -90,6 +97,7 @@ $html_content = file_get_contents($theurl);
 if ($html_content === false) {
     // handle the error here
     echo "file_get_contents error";
+    exit;
 }
 
 
@@ -98,8 +106,14 @@ if ($html_content !== false) {
     $dom = new DOMDocument();
 }
 
+// suppress warnings for invalid HTML
+libxml_use_internal_errors(true);
+
 // load the HTML content into the DOMDocument
-    $dom->loadHTML($html_content);
+$dom->loadHTML($html_content);
+
+// restore error reporting
+libxml_use_internal_errors(false);
     
     // find all the relevant HTML tags (p, h1-h6, li)
     $tags = $dom->getElementsByTagName('p');
