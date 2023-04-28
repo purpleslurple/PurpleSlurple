@@ -26,14 +26,15 @@
 // -->'; 
 
 // Automatically detect the location of this file 
-if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) { 
-    $file_location = $_SERVER['REQUEST_URI']; 
-} else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) { 
-    $file_location = $_SERVER['PHP_SELF']; 
-} else { 
-    $file_location = $_SERVER['SCRIPT_NAME']; 
-} 
-$file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
+// if (isset($_SERVER['REQUEST_URI']) && ($_SERVER['REQUEST_URI'] !="") ) { 
+//     $file_location = $_SERVER['REQUEST_URI']; 
+// } else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) { 
+//     $file_location = $_SERVER['PHP_SELF']; 
+// } else { 
+//     $file_location = $_SERVER['SCRIPT_NAME']; 
+// } 
+// $file_location = "https://".$_SERVER['SERVER_NAME'].$file_location;
+$file_location = "https://purpleslurple.com/ps.php";
 
 $theurl = $_GET['theurl'];
 
