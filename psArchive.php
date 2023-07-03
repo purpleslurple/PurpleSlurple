@@ -34,7 +34,7 @@ Hans Fredrik Nordhaug <hans@nordhaug.priv.no>:
 //    $file_location = $_SERVER['SCRIPT_NAME'];
 // }
 // $file_location = "http://".$_SERVER['HTTP_HOST'].$file_location;
-$file_location = "https://purpleslurple.com/psArchive.php"
+$file_location = "https://purpleslurple.com/psArchive.php";
 
 // Register globals is bad, bad, bad - setting $theurl explicitly
 $theurl = $_GET['theurl'];
