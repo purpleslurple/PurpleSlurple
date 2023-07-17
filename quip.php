@@ -1,7 +1,20 @@
 <?php
-// Get the text to search for and the URL to search in
-$text = $_GET['text'];
-$url = $_GET['url'];
+// Get the text to search for... 
+If (isset($_GET['text'])) {
+    $text = $_GET['text'];
+} else {
+    $text = '';
+    echo "Text is not set";
+    exit;
+}
+// and the URL to search in...
+If (isset($_GET['url'])) {
+    $url = $_GET['url'];
+} else {
+    $url = '';
+    echo "URL is not set";
+    exit;
+}
 
 // Set up the HTTP context options
 $options = array(
@@ -15,15 +28,20 @@ $options = array(
 // Create the HTTP context
 $context = stream_context_create($options);
 
-// Get the contents of the URL
-$response = file_get_contents($url, false, $context);
+// Get the contents of the webpage
+$webpage = file_get_contents($url, false, $context);
 
-// Highlight the search text in the response
-$highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $response);
+// Highlight the search text in the webpage
+$highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $webpage);
 
-// Display the highlighted response
+// Add the url as base href to the webpage
+$highlightedResponse = str_replace("<head>", "<head><base href=\"$url\">", $highlightedResponse);
+// Add a disclaimer to the webpage at the top
+$highlightedResponse = "<h1>Disclaimer</h1><p>This is a highlighted version of the webpage at <a href=\"$url\">$url</a>. The highlighting is done by the server, not by the webpage itself.</p>" . $highlightedResponse;
+// Display the highlighted webpage
 echo $highlightedResponse;
 
 // Scroll to the first occurrence of the highlighted text
 echo "<script>var firstMatch = document.querySelector('span[style=\"background-color:yellow;\"]');if (firstMatch) firstMatch.scrollIntoView();</script>";
+
 ?>
