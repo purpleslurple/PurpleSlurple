@@ -26,15 +26,15 @@ Hans Fredrik Nordhaug <hans@nordhaug.priv.no>:
 -->';
 
 // Automatically detect the location of this file
-// if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
-//     $file_location = $_SERVER['PATH_INFO'];
-// } else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) {
-//    $file_location = $_SERVER['PHP_SELF'];
-// } else {
-//    $file_location = $_SERVER['SCRIPT_NAME'];
-// }
-// $file_location = "http://".$_SERVER['HTTP_HOST'].$file_location;
-$file_location = "https://purpleslurple.com/psArchive.php";
+if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
+    $file_location = $_SERVER['PATH_INFO'];
+} else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) {
+   $file_location = $_SERVER['PHP_SELF'];
+} else {
+   $file_location = $_SERVER['SCRIPT_NAME'];
+}
+$file_location = "http://".$_SERVER['HTTP_HOST'].$file_location;
+// $file_location = "https://purpleslurple.com/psArchive.php";
 
 // Register globals is bad, bad, bad - setting $theurl explicitly
 $theurl = $_GET['theurl'];
@@ -58,9 +58,9 @@ and bookmark it, or drag and drop this bookmark onto your browser\'s personal to
 Now when you are viewing a page on which you would like Purple numbers just click the bookmarklet.
 (Javascript must be enabled).</p><hr>
 <p>Enter the URL of the page to which you would like to apply Purple numbers.</p>
-<form method="get" action="ps.php"><input type="text" name="theurl" size="30">
+<form method="get" action="'.$_SERVER['SCRIPT_NAME'].'"><input type="text" name="theurl" size="30">
 (e.g., http://www.somedomain.com/somepage.html)<br><input type="submit" value="Submit"></form>
-<hr><p><a href="http://www.purpleslurple.net/">PurpleSlurple</a> &#153;
+<hr><p><a href="http://www.purpleslurple.com/">PurpleSlurple</a> &#153;
 was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>';
   exit;
 }
