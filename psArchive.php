@@ -36,12 +36,15 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
 $file_location = "http://".$_SERVER['HTTP_HOST'].$file_location;
 // $file_location = "https://purpleslurple.com/psArchive.php";
 
-// Register globals is bad, bad, bad - setting $theurl explicitly
-$theurl = $_GET['theurl'];
+// If set, get the url to slurp
+if (isset($_GET['theurl'])) {
+    $theurl = $_GET['theurl'];
+} else {
+    show_welcome();
+}
 
-// check for target URL, if none present PS form
-if (!($theurl))
-{
+function show_welcome() {
+    global $file_location;
     echo '
 <title>PurpleSlurple</title>
 <h2>Welcome to PurpleSlurple &#153;</h2>
@@ -59,8 +62,8 @@ Now when you are viewing a page on which you would like Purple numbers just clic
 (Javascript must be enabled).</p><hr>
 <p>Enter the URL of the page to which you would like to apply Purple numbers.</p>
 <form method="get" action="'.$_SERVER['SCRIPT_NAME'].'"><input type="text" name="theurl" size="30">
-(e.g., http://www.somedomain.com/somepage.html)<br><input type="submit" value="Submit"></form>
-<hr><p><a href="http://www.purpleslurple.com/">PurpleSlurple</a> &#153;
+(e.g., http://somedomain.com/somepage.html)<br><input type="submit" value="Submit"></form>
+<hr><p><a href="http://purpleslurple.com/">PurpleSlurple</a> &#153;
 was created by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>';
   exit;
 }
@@ -76,7 +79,7 @@ The original page can be found <a href="'.$theurl.'">here</a>.</h1><h2><a href="
 
 // PurpleSlurple footer
 $ps_footer = '<br style="clear:both"><hr><p style="height: 700px">
-<a href="http://www.purpleslurple.net/">PurpleSlurple</a>&#153; was created
+<a href="http://purpleslurple.com/">PurpleSlurple</a>&#153; was created
 by <a href="mailto:matsch@sasites.com">Matthew A. Schneider</a></p>';
 
 // set base to ensure relative links work
