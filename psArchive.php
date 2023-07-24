@@ -33,7 +33,7 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
 } else {
    $file_location = $_SERVER['SCRIPT_NAME'];
 }
-$file_location = "http://".$_SERVER['HTTP_HOST'].$file_location;
+$file_location = "https://".$_SERVER['HTTP_HOST'].$file_location;
 // $file_location = "https://purpleslurple.com/psArchive.php";
 
 // If set, get the url to slurp
