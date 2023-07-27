@@ -40,14 +40,7 @@
 				"mtxr.sqltools-driver-mysql",
 				"ms-vsliveshare.vsliveshare"
 			]
-		},
-			"codespaces": {
-      "repositories": {
-        "purpleslurple/PurpleSlurple": {
-          "permissions": "read-all"
-        }
-      }
-    }
+		}
 	},
 	
 	// Use 'postCreateCommand' to run commands after the container is created.
