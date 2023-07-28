@@ -11,15 +11,15 @@
 			"label": "MariaDB (Free MySQL server)",
 			"onAutoForward": "ignore"
 		},
-    "8080": {
-      "label": "The website",
-      "onAutoForward": "openBrowser"
-    },
-    "8082": {
-      "label": "adminer - DB Administration",
-      "onAutoForward": "notify"
-    }
-  },
+		"8080": {
+			"label": "The website",
+			"onAutoForward": "openBrowser"
+		},
+		"8082": {
+			"label": "adminer - DB Administration",
+			"onAutoForward": "notify"
+		}
+  	},
 	
 	// For use with PHP or Apache (e.g. php -S localhost:8080 or apache2ctl start)
 	"forwardPorts": [ 3306,	8080,	8082 ],
