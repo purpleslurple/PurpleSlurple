@@ -53,7 +53,7 @@ function show_welcome() {
 <p>If you are not familiar with Purple numbers you may want to read Eugene Eric Kim\'s &ldquo;
 <a href="http://www.eekim.com/software/purple/purple.html">An Introduction to Purple</a>&rdquo;.
 See also Eric Armstrong\'s comments on <a href="'.$file_location.
-'?theurl=http://www.treelight.com/software/collaboration/whatsWrongWithEmail.html#purp587">granular addressability</a></p>
+'?theurl=https://web.archive.org/web/20020705201817/http://www.treelight.com/software/collaboration/whatsWrongWithEmail.html#purp720">granular addressability</a></p>
 <p>Want one-click Purple numbers? Right-click on this link,
 <a href="javascript:location.href=\''.$file_location.
 '?theurl=\'+document.location.href;">PurpleSlurple Bookmarklet</a>,
