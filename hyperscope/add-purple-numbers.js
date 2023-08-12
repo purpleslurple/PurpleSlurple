@@ -2,7 +2,7 @@
 
 window.onload = function() {
 
-javascript:(function() {
+(function() {
     var theurl = encodeURIComponent(window.location.href);
     var fcontents = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
 
