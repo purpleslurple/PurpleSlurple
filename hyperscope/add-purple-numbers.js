@@ -1,5 +1,7 @@
 // This code was generated using ChatGPT, in response to prompts by Matthew A. Schneider.
 
+window.onload = function() {
+
 javascript:(function() {
     var theurl = encodeURIComponent(window.location.href);
     var fcontents = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
@@ -19,3 +21,4 @@ javascript:(function() {
         element.insertBefore(parenthesizedContent, element.firstChild);
     });
 })();
+};
