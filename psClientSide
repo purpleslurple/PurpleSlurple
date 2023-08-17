@@ -1,0 +1,20 @@
+javascript:(function()%7Bjavascript%3A(function()%20%7Bvar%20theurl%20%3D%20encodeURIComponent(window.location.href)%3Bvar%20fcontents%20%3D%20document.querySelectorAll('p%2C%20h1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%2C%20li')%3Bfcontents.forEach(function(element%2C%20index)%20%7Bvar%20fragmentId%20%3D%20%22purp%22%20%2B%20index%3Bvar%20link%20%3D%20document.createElement('a')%3Blink.href%20%3D%20'%23'%20%2B%20fragmentId%3Blink.id%20%3D%20fragmentId%3Blink.innerHTML%20%3D%20'%3Cfont%20color%3D%22purple%22%3E'%20%2B%20index%20%2B%20'%3C%2Ffont%3E'%3Bvar%20parenthesizedContent%20%3D%20document.createElement('span')%3BparenthesizedContent.appendChild(document.createTextNode('('))%3BparenthesizedContent.appendChild(link)%3BparenthesizedContent.appendChild(document.createTextNode(')%20'))%3Belement.insertBefore(parenthesizedContent%2C%20element.firstChild)%3B%7D)%3B%7D)()%7D)()
+javascript:(function() {
+    var theurl = encodeURIComponent(window.location.href);
+    var fcontents = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li');
+
+    fcontents.forEach(function(element, index) {
+        var fragmentId = "purp" + index;
+        var link = document.createElement('a');
+        link.href = '#' + fragmentId;
+        link.id = fragmentId;
+        link.innerHTML = '<font color="purple">' + index + '</font>';
+        
+        var parenthesizedContent = document.createElement('span');
+        parenthesizedContent.appendChild(document.createTextNode('('));
+        parenthesizedContent.appendChild(link);
+        parenthesizedContent.appendChild(document.createTextNode(') '));
+        
+        element.insertBefore(parenthesizedContent, element.firstChild);
+    });
+})();
