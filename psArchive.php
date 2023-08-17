@@ -87,8 +87,17 @@ $ps_base = "<base href='$theurl'>";
 // collapse outline (hiding elements)
 $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style>\n";
 
-// slurp the page
-$fcontents = file($theurl);
+// Slurp the page
+// Accept https URLs only
+if (strpos($theurl,"https://") !== 0) {
+    echo "<h1>PurpleSlurple only slurps https:// protocol URLS. $theurl is invalid.</h1>";
+    exit;
+}
+$fcontents = @file($theurl);
+if (!$fcontents) {
+    echo "<h1>Could not open $theurl</h1>";
+    exit;
+}
 $theurl = urlencode($theurl);
 $ps_contents = "";
 foreach ($fcontents as $line_num => $line) {
