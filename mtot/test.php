@@ -1,9 +1,7 @@
 <?php
 $urls = array(
-    "https://en.wikipedia.org/wiki/Deepfake",
-    "https://www.feynmanlectures.caltech.edu/I_35.html",
-    "https://thefutureoftext.org/team/",
-    "https://www.thefutureoftext.org/symposium.html",
+    "https://example.com/page1",
+    "https://example.com/page2",
     // Add more URLs here
 );
 
@@ -14,8 +12,26 @@ foreach ($urls as $url) {
     // Retrieve the web page content
     $webContent = file_get_contents($url);
 
-    // Extract all words from the content
-    $words = str_word_count(strip_tags($webContent), 1);
+    // Create a DOMDocument object to parse the HTML
+    $dom = new DOMDocument();
+    @$dom->loadHTML($webContent);
+
+    // Initialize an XPath object
+    $xpath = new DOMXPath($dom);
+
+    // Query to select all text nodes within the <p> tags
+    $query = "//p//text()";
+
+    $textNodes = $xpath->query($query);
+    $articleText = "";
+
+    // Combine all text nodes to form the article content
+    foreach ($textNodes as $node) {
+        $articleText .= $node->nodeValue . " ";
+    }
+
+    // Tokenize the article content into words
+    $words = preg_split('/\s+/', $articleText, -1, PREG_SPLIT_NO_EMPTY);
 
     // Select a random starting point for 8 consecutive words
     $startIndex = mt_rand(0, count($words) - 8);
