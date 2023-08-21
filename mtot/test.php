@@ -1,7 +1,7 @@
 <?php
 $urls = array(
-    "https://example.com/page1",
-    "https://example.com/page2",
+    "https://www.feynmanlectures.caltech.edu/I_35.html",
+    "https://www.infoworld.com/article/3697653/when-the-rubber-duck-talks-back.html",
     // Add more URLs here
 );
 
