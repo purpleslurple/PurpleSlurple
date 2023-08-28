@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notecard App</title>
+    <style>
+        .notecard {
+            position: absolute;
+            width: 200px;
+            height: 150px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <button id="addNotecard">Add Notecard</button>
+    <button id="savePositions">Save Positions</button>
+    <div id="notecardContainer"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const notecardContainer = document.getElementById("notecardContainer");
+            const addNotecardButton = document.getElementById("addNotecard");
+            const savePositionsButton = document.getElementById("savePositions");
+            let notecardCount = 0;
+
+            function addNotecard() {
+                const notecard = document.createElement("div");
+                notecard.className = "notecard";
+                notecard.id = `notecard-${notecardCount}`;
+                notecard.innerHTML = `${notecard.id}`;
+                notecardCount++;
+                notecardContainer.appendChild(notecard);
+
+                // Add drag-and-drop listeners
+                notecard.addEventListener("mousedown", function(event) {
+                    let offsetX = event.clientX - notecard.offsetLeft;
+                    let offsetY = event.clientY - notecard.offsetTop;
+
+                    function handleDrag(event) {
+                        notecard.style.left = event.clientX - offsetX + "px";
+                        notecard.style.top = event.clientY - offsetY + "px";
+                    }
+
+                    function handleRelease() {
+                        window.removeEventListener("mousemove", handleDrag);
+                        window.removeEventListener("mouseup", handleRelease);
+                    }
+
+                    window.addEventListener("mousemove", handleDrag);
+                    window.addEventListener("mouseup", handleRelease);
+                });
+            }
+
+            addNotecardButton.addEventListener("click", addNotecard);
+
+            savePositionsButton.addEventListener("click", function() {
+                const positions = {};
+                const notecards = notecardContainer.querySelectorAll(".notecard");
+                notecards.forEach(function(notecard) {
+                    positions[notecard.id] = {
+                        top: notecard.offsetTop,
+                        left: notecard.offsetLeft
+                    };
+                });
+
+                // Save positions and notecardCount
+                const dataToSave = {
+                    positions: positions,
+                    notecardCount: notecardCount
+                };
+
+                localStorage.setItem("notecardData", JSON.stringify(dataToSave));
+                alert("Positions saved!");
+            });
+
+            // Load positions and notecardCount from localStorage
+            function loadPositions() {
+                const savedData = JSON.parse(localStorage.getItem("notecardData"));
+                if (savedData) {
+                    notecardCount = savedData.notecardCount; // Restore notecardCount
+                    const savedPositions = savedData.positions;
+                    Object.keys(savedPositions).forEach(function(notecardId) {
+                        const notecard = document.createElement("div"); // Create notecard
+                        notecard.className = "notecard";
+                        notecard.id = notecardId; // Use the saved notecard ID
+                        notecard.innerHTML = `${notecard.id}`;
+                        notecardContainer.appendChild(notecard); // Append notecard to container
+
+                        notecard.style.top = savedPositions[notecardId].top + "px";
+                        notecard.style.left = savedPositions[notecardId].left + "px";
+
+                        // Add drag-and-drop listeners for loaded notecards
+                        notecard.addEventListener("mousedown", function(event) {
+                            let offsetX = event.clientX - notecard.offsetLeft;
+                            let offsetY = event.clientY - notecard.offsetTop;
+
+                            function handleDrag(event) {
+                                notecard.style.left = event.clientX - offsetX + "px";
+                                notecard.style.top = event.clientY - offsetY + "px";
+                            }
+
+                            function handleRelease() {
+                                window.removeEventListener("mousemove", handleDrag);
+                                window.removeEventListener("mouseup", handleRelease);
+                            }
+
+                            window.addEventListener("mousemove", handleDrag);
+                            window.addEventListener("mouseup", handleRelease);
+                        });
+                    });
+                }
+            }
+
+            // Call loadPositions when the page loads or reloads
+            loadPositions();
+        });
+    </script>
+</body>
+</html>
