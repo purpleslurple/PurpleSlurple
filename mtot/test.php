@@ -2,6 +2,7 @@
 $urls = array(
     "https://www.feynmanlectures.caltech.edu/I_35.html",
     "https://www.infoworld.com/article/3697653/when-the-rubber-duck-talks-back.html",
+    "https://hacks.mozilla.org/2022/09/the-100-percent-markdown-expedition/",
     // Add more URLs here
 );
 
