@@ -98,13 +98,65 @@ if (!$fcontents) {
     echo "<h1>Could not open $theurl</h1>";
     exit;
 }
+// Turn off error reporting
+error_reporting(0);
+
 $theurl = urlencode($theurl);
+// $file_location = urlencode($file_location); // Encode the file location as well
+
+// Convert the array into a single string
+$fullHtmlContent = implode('', $fcontents);
+
+// Create a DOMDocument object and load the HTML content
+$dom = new DOMDocument();
+libxml_use_internal_errors(true); // Suppress DOMDocument errors
+$dom->loadHTML($fullHtmlContent);
+libxml_use_internal_errors(false); // Reset libxml error handling
+
+// Create a DOMXPath object for querying the DOM
+$xpath = new DOMXPath($dom);
+
+// Query for all <p>, <h1> to <h6>, and <li> elements
+$elements = $xpath->query("//p | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 | //li");
+
+// Counter for generating unique numbers
+$counter = 0;
+
+// Initialize the variable to store the modified HTML content
 $ps_contents = "";
-foreach ($fcontents as $line_num => $line) {
-    $pattern = "/<p[^>]*>|<h[1-6][^>]*>|<li[^nk>]*>/i";
-    $replacement = "\\0(<a href='$file_location?theurl=$theurl#purp$line_num' id='purp$line_num'><font color='purple'>$line_num</font></a>) ";
-    $ps_contents .= preg_replace($pattern, $replacement, $line);
+
+// Iterate through the elements and add purple numbers
+foreach ($elements as $element) {
+    $fragmentId = "purp" . $counter;
+    
+    // Create an <a> element with the purple number
+    $aElement = $dom->createElement('a');
+    // $aElement->setAttribute('href', "#$fragmentId");
+    $aElement->setAttribute('href', "$file_location?theurl=$theurl#$fragmentId");
+
+    $aElement->setAttribute('id', $fragmentId);
+    
+    $fontElement = $dom->createElement('font');
+    $fontElement->setAttribute('color', 'purple');
+    $fontElement->textContent = $counter;
+    
+    $aElement->appendChild($fontElement);
+    
+    // Create a parenthesized span containing the <a> element
+    $spanElement = $dom->createElement('span', '(');
+    $spanElement->appendChild($aElement);
+    $spanElement->appendChild($dom->createTextNode(') '));
+    
+    // Insert the parenthesized span at the beginning of the element's content
+    $element->insertBefore($spanElement, $element->firstChild);
+    
+    // Increment the counter
+    $counter++;
 }
+
+// Get the modified HTML content
+$ps_contents = $dom->saveHTML();
+
 
 // find head and body and insert disclaimer/header/footer/style/base
 list($head,$body) = explode("</head>", $ps_contents);
