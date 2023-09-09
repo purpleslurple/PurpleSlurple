@@ -16,7 +16,7 @@ If (isset($_GET['annotation'])) {
 
 // and the URL to search in...
 If (isset($_GET['url'])) {
-    $url = urlencode($_GET['url']);
+    $url = $_GET['url'];
 } else {
     $url = '';
     echo "URL is not set";
