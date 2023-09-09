@@ -1,7 +1,7 @@
 <?php
 // Get the text to search for... 
 If (isset($_GET['text'])) {
-    $text = urlencode($_GET['text']);
+    $text = $_GET['text'];
 } else {
     $text = '';
     echo "Text is not set";
@@ -9,7 +9,7 @@ If (isset($_GET['text'])) {
 }
 // Get the annotation parameter...
 If (isset($_GET['annotation'])) {
-    $annotation = urlencode($_GET['annotation']);
+    $annotation = $_GET['annotation'];
 } else {
     $annotation = 'No annotation provided';
 }
