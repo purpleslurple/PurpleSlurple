@@ -1,15 +1,17 @@
-javascript:(function() {
-  var url = encodeURIComponent(window.location.href);
-  var sel = window.getSelection();
-  var htmlContent = '';
-  if (sel.rangeCount) {
-    var container = document.createElement('div');
-    for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-      container.appendChild(sel.getRangeAt(i).cloneContents());
+javascript:(function(){
+    var selectedText = window.getSelection().toString();
+    var currentPageUrl = window.location.href;
+    var annotation = prompt("Enter your annotation:");
+    
+    if (annotation !== null) {
+      var baseUrl = "https://purpleslurple.com/quip.php";
+      var urlParam = encodeURIComponent(currentPageUrl);
+      var textParam = encodeURIComponent(selectedText);
+      var annotationParam = encodeURIComponent(annotation);
+      
+      var constructedUrl = baseUrl + "?url=" + urlParam + "&text=" + textParam + "&annotation=" + annotationParam;
+      
+      window.location.href = constructedUrl;
     }
-    htmlContent = container.innerHTML;
-    htmlContent = encodeURIComponent(htmlContent);
-  }
-  var annotation = encodeURIComponent(prompt('Enter the annotation'));
-  window.location.href = 'https://fantastic-meme-7x7vqw4grq27qq-8080.app.github.dev/quip.php?url=' + url + '&text=' + htmlContent + '&annotation=' + annotation;
-})();
+  })();
+  
