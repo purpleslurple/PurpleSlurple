@@ -7,6 +7,13 @@ If (isset($_GET['text'])) {
     echo "Text is not set";
     exit;
 }
+// Get the annotation parameter...
+If (isset($_GET['annotation'])) {
+    $annotation = $_GET['annotation'];
+} else {
+    $annotation = 'No annotation provided';
+}
+
 // and the URL to search in...
 If (isset($_GET['url'])) {
     $url = $_GET['url'];
@@ -31,8 +38,9 @@ $context = stream_context_create($options);
 // Get the contents of the webpage
 $webpage = file_get_contents($url, false, $context);
 
-// Highlight the search text in the webpage
-$highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $webpage);
+// Highlight the search text in the webpage and insert $annotation as title attribute
+$highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\" title=\"$annotation\">$text</span>", $webpage);
+// $highlightedResponse = preg_replace("/$text/i", "<span style=\"background-color:yellow;\">$text</span>", $webpage);
 
 // Add the url as base href to the webpage
 $highlightedResponse = str_replace("<head>", "<head><base href=\"$url\">", $highlightedResponse);
