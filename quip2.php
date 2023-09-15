@@ -56,7 +56,7 @@ function get_quip($url, $text, $annotation = 'No annotation provided') {
     
         // Log the parameters and webpage to a file
         $log = date('Y-m-d H:i:s') . "\t" . $url . "\t" . $text . "\t" . $annotation . "\t" . $webpage . "\n";
-        file_put_contents('quip.log', $log, FILE_APPEND);
+        file_put_contents('quip2.log', $log, FILE_APPEND);
     }
 
     // Add the url as base href to the webpage
