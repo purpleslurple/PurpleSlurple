@@ -1,5 +1,4 @@
 <?php
-// Release 104
 // Config
 $show_header = true;
 $show_footer = true;
@@ -9,13 +8,6 @@ $show_footer = true;
 $ps_disclaimer = '<!--
 PurpleSlurple Copyright 2002 by Matthew A. Schneider.
 PurpleSlurple code is licensed under the Open Software License version 1.1.
-This version was modified 12.12.2006 by
-Hans Fredrik Nordhaug <hans@nordhaug.priv.no>:
-- Made it work with register globals off (which is highly recommended).
-- Added autodetecting of location of this script.
-- Inserted header/disclaimer, style, base and footer without
-   creating invalid HTML/breaking existing package.
-- Added config section, might not be very useful.
 ***************************************************************
 * PurpleSlurple(TM) was created by Matthew A. Schneider       *
 * and was inspired by Purple, Augment, and others.            *
