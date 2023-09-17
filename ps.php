@@ -26,7 +26,8 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
 } else {
    $file_location = $_SERVER['SCRIPT_NAME'];
 }
-$file_location = "https://".$_SERVER['HTTP_HOST'].$file_location;
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$file_location = $protocol . "://" . $_SERVER['HTTP_HOST'] . $file_location;
 
 // If set, get the url to slurp
 if (isset($_GET['theurl'])) {
