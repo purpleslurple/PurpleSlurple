@@ -1,4 +1,16 @@
 <?php
+// Automatically detect the location of this file, including the protocol
+if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
+    $file_location = $_SERVER['PATH_INFO'];
+} else if (isset($_SERVER['PHP_SELF']) && ($_SERVER['PHP_SELF'] !="") ) {
+   $file_location = $_SERVER['PHP_SELF'];
+} else {
+   $file_location = $_SERVER['SCRIPT_NAME'];
+}
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$file_location = $protocol . "://" . $_SERVER['HTTP_HOST'] . $file_location;
+
+
 // Get the URL to search in...
 if (isset($_GET['url'])) {
     $url = $_GET['url'];
@@ -74,13 +86,10 @@ function get_quip($url, $text, $annotation = 'No annotation provided') {
 
 // Show the welcome page with the bookmarklet
 function show_welcome() {
-    $bookmarkletCode = urlencode(file_get_contents('quip-bookmarklet.js')); // File should be single line of code and URL encoded
+    $bookmarkletCode = urlencode(file_get_contents('quip-bookmarklet2.js')); // File should be single line of code and URL encoded
 
-    $welcome = '<h1>Welcome to QuiP</h1>
-    <p>QuiP is a simple tool to highlight and annotate text on a webpage. Use it to easily share items of interest.</p>
-    <p>QuiP Bookmarklet: <a href="<?php echo $bookmarkletCode; ?>">QuiP</a>. Drag this link to your bookmarks bar to install the bookmarklet.</p>';
-
-    return $welcome;
+    echo '<a href="'.$bookmarkletCode.'">QuiP2</a>';
+  exit;
 }
 
 
