@@ -27,7 +27,7 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
    $file_location = $_SERVER['SCRIPT_NAME'];
 }
 
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$protocol = "https";
 $file_url = $protocol . "://" . $_SERVER['HTTP_HOST'] . $file_location;
 
 // if HTTP_X_FORWARDED_HOST is set, we are behind a proxy, so use that instead
