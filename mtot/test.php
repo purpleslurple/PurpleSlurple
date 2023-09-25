@@ -57,6 +57,8 @@ foreach ($urls as $url) {
     // Print the results
     echo "Current URL: $url<br>";
     echo "Quoted String: $quotedString<br>";
+    // display the Google query URL, and make it a link, open in new tab
+    echo "Google query: <a href='$googleQuery' target='_blank'>$googleQuery</a><br>";
     echo "First Google result: $googleResultURL<br>";
     echo "Match condition: $matchCondition<br><br>";
 
