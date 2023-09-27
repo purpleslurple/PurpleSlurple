@@ -49,7 +49,7 @@ function show_welcome() {
 <h2>Welcome to PurpleSlurple &#153;</h2>
 <h3>Granular Addressability in HTML Documents - ON THE FLY</h3>
 <p><b><q>Slurp up a Web page, spit back Purple numbers</q></b></p><hr>
-<p>If you are not familiar with Purple numbers you may want to read Eugene Eric Kim\'s &ldquo;
+<p>If you are not familiar with Purple numbers you might want to read Eugene Eric Kim\'s &ldquo;
 <a href="http://www.eekim.com/software/purple/purple.html">An Introduction to Purple</a>&rdquo;.
 See also Eric Armstrong\'s comments on <a href="'.$file_url.
 '?theurl=https://web.archive.org/web/20020705201817/http://www.treelight.com/software/collaboration/whatsWrongWithEmail.html#PS720">granular addressability</a></p>
