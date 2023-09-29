@@ -88,11 +88,11 @@ $ps_base = "<base href='$theurl'>";
 $ps_style = "<style type='text/css'>p {display:none}\nli {display:none}\n</style>\n";
 
 // Slurp the page
-// Accept https URLs only
-if (strpos($theurl,"https://") !== 0) {
-    echo "<h1>PurpleSlurple only slurps https:// protocol URLS. $theurl is invalid.</h1>";
-    exit;
-}
+// Accept https URLs only - disabled for now (too many sites not supporting https)
+// if (strpos($theurl,"https://") !== 0) {
+//     echo "<h1>PurpleSlurple only slurps https:// protocol URLS. $theurl is invalid.</h1>";
+//     exit;
+// }
 $fcontents = @file($theurl);
 if (!$fcontents) {
     echo "<h1>Could not open $theurl</h1>";
