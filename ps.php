@@ -27,7 +27,14 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
    $file_location = $_SERVER['SCRIPT_NAME'];
 }
 
-$protocol = "https";
+// Automatically detect the serving protocol 
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    $protocol = "https";
+} else {
+    $protocol = "http";
+}
+
+// Construct the URL to this file
 $file_url = $protocol . "://" . $_SERVER['HTTP_HOST'] . $file_location;
 
 // if HTTP_X_FORWARDED_HOST is set, we are behind a proxy, so use that instead
@@ -100,9 +107,6 @@ if (!$fcontents) {
 }
 // Turn off error reporting
 error_reporting(0);
-
-$theurl = urlencode($theurl);
-// $file_location = urlencode($file_location); // Encode the file location as well
 
 // Convert the array into a single string
 $fullHtmlContent = implode('', $fcontents);
