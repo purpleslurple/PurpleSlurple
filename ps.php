@@ -28,8 +28,14 @@ if (isset($_SERVER['PATH_INFO']) && ($_SERVER['PATH_INFO'] !="") ) {
 }
 
 // Automatically detect the serving protocol 
+
+// Check if the HTTPS variable is set and has a value of 'on'
 if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
     $protocol = "https";
+// Check if the X-Forwarded-Proto header is set and has a value of 'https'
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $protocol = "https";
+// If neither condition is true, assume the protocol is HTTP
 } else {
     $protocol = "http";
 }
