@@ -1,0 +1,26 @@
+:root { color-scheme: light dark; }
+body {
+  box-sizing: border-box;
+  width: 240px;
+  margin: 0;
+  padding: 14px;
+  background: #f7f4ed;
+  color: #202124;
+  font: 14px/1.4 system-ui, -apple-system, sans-serif;
+}
+button {
+  width: 100%;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: #7c3aed;
+  color: white;
+  font: 650 14px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: default; }
+#status { min-height: 1.4em; margin: 9px 2px 0; color: #6b665e; }
+@media (prefers-color-scheme: dark) {
+  body { background: #17191b; color: #ece7dc; }
+  #status { color: #aaa398; }
+}
