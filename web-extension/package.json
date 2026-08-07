@@ -1,0 +1,12 @@
+{
+  "name": "purpleslurple-reader",
+  "version": "0.1.2",
+  "private": true,
+  "description": "A quiet reader view with granular PurpleSlurple paragraph links.",
+  "scripts": {
+    "test": "node test/reader-engine.test.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

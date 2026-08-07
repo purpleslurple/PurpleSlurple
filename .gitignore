@@ -5,3 +5,7 @@
 .vscode/launch.json.bak2
 pschat.php
 .hintrc
+.DS_Store
+web-extension/Safari Project/
+web-extension/Safari Project*/
+web-extension/*.zip
