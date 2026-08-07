@@ -1,4 +1,4 @@
-# PurpleSlurple Reader 0.1.1
+# PurpleSlurple Reader 0.1.2
 
 This is the desktop-first Safari MVP: press the toolbar button, then **Open Reader View**.
 The current page is cleaned, restyled, and numbered with stable `#purpN` fragments. Clicking
@@ -12,7 +12,8 @@ or preferences anywhere.
 1. Install Apple's full Xcode application from the Mac App Store if it is not already installed.
    The smaller standalone **Command Line Tools** package does not include Safari's converter.
 2. Open Xcode once and allow it to install any additional requested components.
-3. Double-click `install-on-mac.command`.
+3. Double-click `install-on-mac.command`. Its disposable Xcode project is generated in
+   macOS's temporary directory, never inside this source folder.
 4. In the Xcode window, select **My Mac** as the destination and press **Run**.
 5. Open Safari > Settings > Extensions and enable **PurpleSlurple Reader**.
 6. Put the extension in Safari's toolbar if Safari does not do so automatically.

@@ -2,7 +2,7 @@
 set -e
 
 SOURCE_DIR="${0:A:h}"
-PROJECT_DIR="$SOURCE_DIR/Safari Project"
+PROJECT_DIR="${TMPDIR:-/tmp/}PurpleSlurple-Safari-Project"
 XCODE_DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
 
 if [[ -d "$XCODE_DEVELOPER_DIR" ]]; then

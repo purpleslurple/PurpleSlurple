@@ -162,5 +162,5 @@
     if (location.hash.startsWith('#purp')) location.hash = location.hash;
   }
 
-  window.PurpleSlurpleReader = { activate, scoreNode, version: '0.1.1' };
+  window.PurpleSlurpleReader = { activate, scoreNode, version: '0.1.2' };
 })();

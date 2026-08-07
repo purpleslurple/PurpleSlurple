@@ -20,7 +20,7 @@ const dom = new JSDOM(`<!doctype html><html><head><title>Fallback title</title><
 });
 
 dom.window.eval(engine);
-assert.equal(dom.window.PurpleSlurpleReader.version, '0.1.1');
+assert.equal(dom.window.PurpleSlurpleReader.version, '0.1.2');
 dom.window.PurpleSlurpleReader.activate();
 
 const { document } = dom.window;
